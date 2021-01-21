@@ -8,8 +8,395 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     <!-- Bootstrap CSS -->
     <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+    <title>CouponSit</title>
+
+    <style type="text/css">
+      body {
+        background-color: #f0f0f0;
+      }
+
+      .search {
+        width: 50%;
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        /*margin-left: 21%;*/
+      }
+
+      .searchTerm {
+        width: 100%;
+        border: 3px solid #00b4cc;
+        border-right: none;
+        padding: 5px;
+        height: 36px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9dbfaf;
+      }
+
+      .searchTerm:focus {
+        color: #00b4cc;
+      }
+
+      .searchButton {
+        width: 40px;
+        height: 36px;
+        border: 1px solid #00b4cc;
+        background: #00b4cc;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .carousel-item {
+        width: 56vw !important;
+        height: 45vh !important;
+      }
+
+      .allShop__card .row {
+        height: 330px;
+        overflow-x: auto;
+        /* flex-wrap: nowrap; */
+      }
+
+      .single__shop {
+        border: 1px solid gainsboro;
+        height: 100px;
+        width: 262px;
+        display: inline-block;
+      }
+      .single__shop:hover {
+        box-shadow: -1px -1px 10px 5px rgba(0, 0, 0, 0.2);
+      }
+      .single__shop a:hover {
+        text-decoration: none;
+      }
+
+      .single__shop__details {
+        border-left: 1px solid gainsboro;
+        width: 150px;
+        height: 100px;
+        color: black;
+      }
+
+      .modal1 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: 200ms ease-in-out;
+        border: none;
+        z-index: 10;
+        background-color: white;
+        width: 550px;
+        max-width: 80%;
+      }
+      .modal1.active {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .modal1-header {
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .modal1-header .close-button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+      .modal1-body {
+        padding: 10px 15px;
+      }
+      .modal1-footer{
+        background-color: #EFF1F5;
+      }
+      #overlay {
+        position: fixed;
+        opacity: 0;
+        transition: 200ms ease-in-out;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+      }
+      #overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .carousel-item{
+        width: 100vw;
+        height: 45vh;
+        
+      }
+      .carousel-item img{
+        object-fit: scale-down;
+        
+      }
+      .icons{
+        top:70%;
+        left:0;
+        transform: translateY(0%);
+        position: fixed;
+        z-index: 1000;
+      }
+      .icons ul{
+        padding: initial;
+      }
+      .icons ul li{
+        height: 40px;
+        width: 40px;
+        list-style-type: none;
+        padding-left: 12px;
+        padding-top: 6px;
+        margin-top: 5px;
+        color:#fff;
+        
+      }
+      .facebook{
+        background: #3b5998;
+      }
+      .youtube{
+        background: #ff0000;
+      }
+      .instagram{
+        background-image: linear-gradient(140deg,#F7BD3B , #F5003D,#2038DE);
+      }
+      .twitter{
+        background: #55acee;
+      }
+      .icons ul li:hover{
+        padding-left: 20px;
+        width: 60px;
+        transition:  1s ease-in;
+      }
+
+      /* best coupon card height fixing starts here*/
+      .card-height{
+        height: 50px;
+      }
+      .car-img-size{
+        height: 30px;
+        width: 45px;
+      }
+      /* best coupon card height fixing ends here*/
+
+      /* Mega navigation Item design starts here */
+      
+      .mega-navItem-background{
+        height: 98px;
+      }
+
+
+      /* sticky bar */
+
+      .ct-socials {
+  top: 25%;
+  list-style: none;
+  z-index: 10;
+  -webkit-transition: right 0.25s fade-in;
+  transition: right 0.25s fade-in;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.sticky-container {
+  /*background-color: #333;*/
+  padding: 0px;
+  margin: 0px;
+  position: fixed;
+  right: -119px;
+  /*top:130px;*/
+  width: 200px;
+  z-index:1000;
+}
+
+@media only screen and (max-width: 768px) {
+  .ct-socials {
+    top: 60%;
+     overflow:hidden;
+     display:none;
+  }
+  .sticky-container {
+    position: absolute;
+    overflow:hidden;
+    right: 2px;
+    display:none;
+    
+  }
+  
+  .icon-bar {
+            display: block;
+  }
+  
+ 
+}
+
+.face {
+  background-color: #3b5998;
+}
+
+.tweet {
+  background-color: #00aced;
+}
+.linked {
+  background-color: #007bb6;
+}
+
+.insta {
+  background-color: #c32aa3;
+}
+
+.sticky li {
+      z-index:2000;
+  border-bottom-left-radius: 0.9rem;
+  border-top-left-radius: 0.2rem;
+  list-style-type: none;
+
+  color: #ffffff;
+
+  height: 43px;
+  padding: 0px;
+  margin: 1px 1px 1px 1px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  filter: #ffffff;
+  -webkit-filter: grayscale(30%);
+}
+
+.sticky li:hover {
+  margin-left: -115px;
+  /*-webkit-transform: translateX(-115px);
+		-moz-transform: translateX(-115px);
+		-o-transform: translateX(-115px);
+		-ms-transform: translateX(-115px);
+		transform:translateX(-115px);*/
+  /*background-color: #8e44ad;*/
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale");
+  -webkit-filter: grayscale(0%);
+}
+
+.sticky li img {
+  float: left;
+  margin: 5px 5px;
+  margin-right: 10px;
+}
+
+.sticky li p {
+  padding: 0px;
+  margin: 0px;
+  text-transform: uppercase;
+  line-height: 43px;
+}
+
+.float-sm {
+}
+
+.fl-fl {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 4px;
+  width: 190px;
+  position: fixed;
+  right: -140px;
+  z-index: 1000;
+  font: normal normal 10px inherit;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  border-top-left-radius: 6px;
+}
+
+.fl-fl img {
+  margin-right: 8px;
+  margin-left: 5px;
+  padding: 0rem 0.01rem;
+}
+
+
+.fl-fl:hover {
+  right: 0;
+}
+
+.fl-fl a {
+  color: #fff !important;
+  text-decoration: none;
+  text-align: center;
+  line-height: 43px !important;
+  vertical-align: top !important;
+}
+
+.float-fb {
+  top: 160px;
+}
+
+.float-tw {
+  top: 215px;
+}
+
+.float-rs {
+  top: 270px;
+}
+
+.float-ig {
+  top: 325px;
+}
+
+
+      /* stick end */
+      
+      @media only screen and (max-width: 600px) {
+        #navbarSupportedContent {
+          height: 100%;
+          z-index: 0.3;
+        }
+        .search {
+          padding-top: 15px;
+          width: 100%;
+          height: 100%;
+          margin: 0 auto;
+        }
+      }
+    </style>
+
+    
+
+    <!-- Bootstrap CSS -->
+    <!-- <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -100,7 +487,7 @@
           margin: 0 auto;
         }
       }
-    </style>
+    </style> -->
   </head>
   <body>
     <!-- navbar Start-->
@@ -138,12 +525,10 @@
             <div
               class="dropdown-menu border-0"
               aria-labelledby="navbarDropdownMenuLink"
+              id="dropdown-menu-id-nextPage"
+              style="width: 820px;"
             >
-              <a class="dropdown-item" href="/allStores">All Stores</a>
-              <a class="dropdown-item" href="#">Link 2</a>
-              <a class="dropdown-item" href="#">Link 3</a>
-              <a class="dropdown-item" href="#">Link 4</a>
-              <a class="dropdown-item" href="#">Link 5</a>
+
             </div>
           </li>
 
@@ -159,14 +544,16 @@
               Catagories
             </a>
             <div
+              id="dropdownCategory"
               class="dropdown-menu border-0"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <a class="dropdown-item" href="#">Link 1</a>
+              <!-- <a class="dropdown-item" href="#">Link 1</a>
               <a class="dropdown-item" href="#">Link 2</a>
               <a class="dropdown-item" href="#">Link 3</a>
               <a class="dropdown-item" href="#">Link 4</a>
-              <a class="dropdown-item" href="#">Link 5</a>
+              <a class="dropdown-item" href="#">Link 5</a> -->
+              
             </div>
           </li>
           <li class="nav-item" id="loginid">
@@ -754,6 +1141,89 @@
     <!-- Footer -->
     <!-- footer end -->
 
+    <!-- next page's STORE mega navigation code start-->
+    <script>
+      var dropdown_down_menu = document.getElementById("dropdown-menu-id-nextPage");
+
+      const shopList = async () => {
+        const res = await fetch("http://localhost:8081/allStoresNew");
+        const allShop  = await res.json();
+        const dropdowns = allShop.slice(0,8)
+          .map(
+            (shop) =>
+              `       
+                        <div class="col-md-4 single__shop mx-1 mb-2">
+                          <a class="dropdown-item mega-navItem-background" href="/singleShop/${shop._id}">
+                            <div
+                              class="d-flex justify-content-around align-items-center"
+                              style="margin-top: -5px"
+                              
+                            >
+                              <div
+                                class="single__shop__logo d-flex mx-2 justify-content-center align-items-center"
+                              >
+                                <img
+                                  class=""
+                                  style="width: 80px; height: 50px"
+                                  src="${shop.image}"
+                                />
+                              </div>
+                              <div class="single__shop__details p-2">
+                                <div> ${shop.name}</div>
+                                <div>
+                                  <span class="text-success"
+                                    ><small
+                                      >${shop.coupon[0].couponDetails}</small
+                                    ></span
+                                  >
+                                </div>
+                                <div class="text-secondary">
+                                  <span>
+                                    <small
+                                      >${shop.coupon.length} offers</small
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        
+              `
+              
+          )
+          
+          .join("");
+          
+        dropdown_down_menu.innerHTML = dropdowns;
+        const viewAll = document.createElement("a");
+        viewAll.setAttribute("href","/allStores")
+        viewAll.innerText("See All")
+        dropdown_down_menu.append(viewAll);
+      };
+      shopList();
+
+    </script>
+    <!-- Next pages's STORE mega navigation's code ends  -->
+
+    <!-- Next page's CATEGORY mega navigation's code starts -->
+    <script>
+      const dropdownId = document.getElementById("dropdownCategory");
+      const categoriesList = async () => {
+        const res = await fetch("https://couponsite2020.herokuapp.com/categoriesIndex");
+        const categories = await res.json();
+        const dropdowns = categories
+          .map(
+            (category) =>
+              `<a class="dropdown-item" href="/singleCategory/${category._id}">${category.name}</a>`
+          )
+          .join("");
+        dropdownId.innerHTML = dropdowns;
+      };
+      categoriesList();
+    </script>
+    <!-- Next page's CATEGORY mega navigation's code ends -->
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
