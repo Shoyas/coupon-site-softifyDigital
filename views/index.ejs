@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+
+    <title>CouponSit</title>
+
+    <style type="text/css">
+      body {
+        background-color: #f0f0f0;
+      }
+
+      .search {
+        width: 50%;
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        /*margin-left: 21%;*/
+      }
+
+      .searchTerm {
+        width: 100%;
+        border: 3px solid #00b4cc;
+        border-right: none;
+        padding: 5px;
+        height: 36px;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+        color: #9dbfaf;
+      }
+
+      .searchTerm:focus {
+        color: #00b4cc;
+      }
+
+      .searchButton {
+        width: 40px;
+        height: 36px;
+        border: 1px solid #00b4cc;
+        background: #00b4cc;
+        text-align: center;
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .carousel-item {
+        width: 56vw !important;
+        height: 45vh !important;
+      }
+
+      .allShop__card .row {
+        height: 330px;
+        overflow-x: auto;
+        /* flex-wrap: nowrap; */
+      }
+
+      .single__shop {
+        border: 1px solid gainsboro;
+        height: 100px;
+        width: 262px;
+        display: inline-block;
+      }
+      .single__shop:hover {
+        box-shadow: -1px -1px 10px 5px rgba(0, 0, 0, 0.2);
+      }
+      .single__shop a:hover {
+        text-decoration: none;
+      }
+
+      .single__shop__details {
+        border-left: 1px solid gainsboro;
+        width: 150px;
+        height: 100px;
+        color: black;
+      }
+
+      .modal1 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: 200ms ease-in-out;
+        border: none;
+        z-index: 10;
+        background-color: white;
+        width: 550px;
+        max-width: 80%;
+      }
+      .modal1.active {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .modal1-header {
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .modal1-header .close-button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+      .modal1-body {
+        padding: 10px 15px;
+      }
+      .modal1-footer{
+        background-color: #EFF1F5;
+      }
+      #overlay {
+        position: fixed;
+        opacity: 0;
+        transition: 200ms ease-in-out;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+      }
+      #overlay.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .carousel-item{
+        width: 100vw;
+        height: 45vh;
+        
+      }
+      .carousel-item img{
+        object-fit: scale-down;
+        
+      }
+      .icons{
+        top:70%;
+        left:0;
+        transform: translateY(0%);
+        position: fixed;
+        z-index: 1000;
+      }
+      .icons ul{
+        padding: initial;
+      }
+      .icons ul li{
+        height: 40px;
+        width: 40px;
+        list-style-type: none;
+        padding-left: 12px;
+        padding-top: 6px;
+        margin-top: 5px;
+        color:#fff;
+        
+      }
+      .facebook{
+        background: #3b5998;
+      }
+      .youtube{
+        background: #ff0000;
+      }
+      .instagram{
+        background-image: linear-gradient(140deg,#F7BD3B , #F5003D,#2038DE);
+      }
+      .twitter{
+        background: #55acee;
+      }
+      .icons ul li:hover{
+        padding-left: 20px;
+        width: 60px;
+        transition:  1s ease-in;
+      }
+
+      /* best coupon card height fixing starts here*/
+      .card-height{
+        height: 50px;
+      }
+      .car-img-size{
+        height: 30px;
+        width: 45px;
+      }
+      /* best coupon card height fixing ends here*/
+
+      /* Mega navigation Item design starts here */
+      
+      .mega-navItem-background{
+        height: 98px;
+      }
+
+
+      /* sticky bar */
+
+      .ct-socials {
+  top: 25%;
+  list-style: none;
+  z-index: 10;
+  -webkit-transition: right 0.25s fade-in;
+  transition: right 0.25s fade-in;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.sticky-container {
+  /*background-color: #333;*/
+  padding: 0px;
+  margin: 0px;
+  position: fixed;
+  right: -119px;
+  /*top:130px;*/
+  width: 200px;
+  z-index:1000;
+}
+
+@media only screen and (max-width: 768px) {
+  .ct-socials {
+    top: 60%;
+     overflow:hidden;
+     display:none;
+  }
+  .sticky-container {
+    position: absolute;
+    overflow:hidden;
+    right: 2px;
+    display:none;
+    
+  }
+  
+  .icon-bar {
+            display: block;
+  }
+  
+ 
+}
+
+.face {
+  background-color: #3b5998;
+}
+
+.tweet {
+  background-color: #00aced;
+}
+.linked {
+  background-color: #007bb6;
+}
+
+.insta {
+  background-color: #c32aa3;
+}
+
+.sticky li {
+      z-index:2000;
+  border-bottom-left-radius: 0.9rem;
+  border-top-left-radius: 0.2rem;
+  list-style-type: none;
+
+  color: #ffffff;
+
+  height: 43px;
+  padding: 0px;
+  margin: 1px 1px 1px 1px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  filter: #ffffff;
+  -webkit-filter: grayscale(30%);
+}
+
+.sticky li:hover {
+  margin-left: -115px;
+  /*-webkit-transform: translateX(-115px);
+		-moz-transform: translateX(-115px);
+		-o-transform: translateX(-115px);
+		-ms-transform: translateX(-115px);
+		transform:translateX(-115px);*/
+  /*background-color: #8e44ad;*/
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0'/></filter></svg>#grayscale");
+  -webkit-filter: grayscale(0%);
+}
+
+.sticky li img {
+  float: left;
+  margin: 5px 5px;
+  margin-right: 10px;
+}
+
+.sticky li p {
+  padding: 0px;
+  margin: 0px;
+  text-transform: uppercase;
+  line-height: 43px;
+}
+
+.float-sm {
+}
+
+.fl-fl {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 4px;
+  width: 190px;
+  position: fixed;
+  right: -140px;
+  z-index: 1000;
+  font: normal normal 10px inherit;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  border-top-left-radius: 6px;
+}
+
+.fl-fl img {
+  margin-right: 8px;
+  margin-left: 5px;
+  padding: 0rem 0.01rem;
+}
+
+
+.fl-fl:hover {
+  right: 0;
+}
+
+.fl-fl a {
+  color: #fff !important;
+  text-decoration: none;
+  text-align: center;
+  line-height: 43px !important;
+  vertical-align: top !important;
+}
+
+.float-fb {
+  top: 160px;
+}
+
+.float-tw {
+  top: 215px;
+}
+
+.float-rs {
+  top: 270px;
+}
+
+.float-ig {
+  top: 325px;
+}
+
+
+      /* stick end */
+      
+      @media only screen and (max-width: 600px) {
+        #navbarSupportedContent {
+          height: 100%;
+          z-index: 0.3;
+        }
+        .search {
+          padding-top: 15px;
+          width: 100%;
+          height: 100%;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar Start-->
+    <!-- Secnd Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light pl-10 pr-10">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a id="logoId" class="navbar-brand" href="/"
+        ><h2 class="w-100">
+          <dt>Coupon<samp class="text-info">Sit</samp></dt>
+        </h2></a
+      >
+      <div class="collapse navbar-collapse w-100" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Stores
+            </a>
+            <div
+              class="dropdown-menu border-0 row"
+              aria-labelledby="navbarDropdownMenuLink"
+              id="dropdown-menu-id"
+              style="width: 820px;"
+            >
+              
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Catagories
+            </a>
+            <div
+              id="dropdownCategory"
+              class="dropdown-menu border-0"
+              aria-labelledby="navbarDropdownMenuLink"
+            ></div>
+          </li>
+          <li class="nav-item" id="loginid">
+            <a class="nav-link" href="/exclusiveCoupon">Exclusive Coupon</a>
+          </li>
+        </ul>
+
+        <!-- searchbar start -->
+        <div class="search justify-content-center align-items-center">
+          <form action="/allResult" class="d-flex w-100">
+            <input
+              type="text"
+              class="searchTerm"
+              name="search"
+              id="search"
+              placeholder="What are you looking for?"
+              autocomplete="off"
+              style="text-align: center"
+            />
+            <button
+              type="submit"
+              class="searchButton"
+              id="searchButtonId"
+              disabled
+            >
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+          <div
+            id="match-list"
+            class="w-100"
+            style="
+              position: absolute;
+              z-index: 1;
+              top: 40px;
+              background-color: #9dbfaf;
+            "
+          ></div>
+        </div>
+        <!-- Searchbar End -->
+      </div>
+    </nav>
+    <!-- navbar end-->
+
+    <!-- main body start -->
+    <div class="container pt-2 mb-5">
+      <!-- slider -->
+      <div class="row mt-5">
+        <div class="col-md-12 edit-carousel">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" id="carousel-inner-id">
+              
+            </div>
+            <a
+              class="carousel-control-prev carousel-control"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="prev"
+            >
+              <!-- <span
+                class="fas fa-caret-left"
+                aria-hidden="true"
+                style="background-color: white;"
+              ></span> -->
+              <i class="fas fa-chevron-circle-left fa-2x" style="background-color:black;box-shadow: 0 0 5px black;border-radius:50%; position:absolute !important; right: 150px;"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a
+              class="carousel-control-next carousel-control"
+              href="#carouselExampleControls"
+              role="button"
+              data-slide="next"
+            >
+              <!-- <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span> -->
+              <i class="fas fa-chevron-circle-right fa-2x" style="background-color:black;box-shadow: 0 0 5px black;border-radius:50%;position:absolute !important; left: 150px;"></i>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- slider end -->
+      <!-- Select Coupon start -->
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="row" style="text-align: center">
+            <div class="col-md-4 p-2">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div>
+                    <img
+                      class="w-50"
+                      src="./images/undraw_add_to_cart_vkjp.svg"
+                    />
+                  </div>
+
+                  <div class="mt-3" style="text-align: center">
+                    <h5 class="p-2 font-weight-bold">Select Coupon</h5>
+                    <P
+                      >Find the right for your favorite <br />online shopping.
+                      Read terms<br />& conditions of the offer.</P
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 p-2">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div>
+                    <img
+                      class="w-50"
+                      src="./images/undraw_online_shopping_ga73.svg"
+                    />
+                  </div>
+
+                  <div class="mt-3" style="text-align: center">
+                    <h5 class="p-2 font-weight-bold">Shop Normal</h5>
+                    <P
+                      >Visit the online store and choose best <br />products
+                      suitable for you.<br />Add them to Cart</P
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 p-2">
+              <div class="card border-0">
+                <div class="card-body">
+                  <div>
+                    <img
+                      class=""
+                      style="width: 50%; height: 118px"
+                      src="./images/undraw_successful_purchase_uyin.svg"
+                    />
+                  </div>
+
+                  <div class="mt-4" style="text-align: center">
+                    <h5 class="p-2 font-weight-bold">Instant Savings</h5>
+                    <P
+                      >Visit the online store and choose best <br />products
+                      suitable for you.<br />Add them to Cart</P
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Select Coupon end -->
+
+      <!-- Always Best With CouponSite start -->
+      <!-- <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="card border-0">
+            <div class="card-body">
+              <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-md-6 p-5">
+                  <div style="margin: 0 auto">
+                    <h5 class="font-weight-bold">
+                      Always Best With CouponSite
+                    </h5>
+                    <P
+                      >Never pay full price, Rezeem helps you to get the best
+                      price on any product with exclusive coupon codes</P
+                    >
+                  </div>
+                </div>
+                <div class="col-md-6 p-2 d-flex align-items-center">
+                  <div>
+                    <img
+                      class="w-75"
+                      src="./images/undraw_business_shop_qw5t.svg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Always Best With CouponSite End -->
+
+      <!-- Most Popular Stores start -->
+      <div class="row most__popular__store mt-5">
+        <h4 class="w-100 mb-5" style="text-align: center; font-weight: bold">
+          Most Popular Stores
+        </h4>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3 feature__store">
+              <!-- <% shops.slice(0,1).map(function(shop){ %> -->
+              <% let a = Math.floor(Math.random()*shops.length) %>
+              <a href="/singleShop/<%= shops[a]._id %>">
+                <div class="card border-0">
+                  <div class="card-body"  style="height: 45vh">
+                    <div style="text-align: center; font-weight: bold">
+                      <p>Featured Store of the Month</p>
+                      <img
+                        style="width: 200px; height: 120px"
+                        src="<%= shops[a].image %>"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </a>
+              <!-- <%} ) %> -->
+            </div>
+
+            <!-- <div class="col-md-9 allShop__card bg-light d-flex">
+              <div class="row d-flex justify-content-start align-items-center">
+                <% shops.map(function(shop){ %>
+                <div class="single__shop mx-1 mb-2">
+                  <a href="/singleShop/<%= shop._id%>">
+                    <div
+                      class="d-flex justify-content-around align-items-center"
+                    >
+                      <div
+                        class="single__shop__logo d-flex mx-2 justify-content-center align-items-center"
+                      >
+                        <img
+                          class=""
+                          style="width: 80px; height: 50px"
+                          src="<%= shop.image %>"
+                        />
+                      </div>
+                      <div class="single__shop__details p-2">
+                        <div><%= shop.name %></div>
+                        <div>
+                          <span class="text-success"
+                            ><small
+                              ><%= shop.coupon[0].couponDetails%></small
+                            ></span
+                          >
+                        </div>
+                        <div class="text-secondary">
+                          <span>
+                            <small
+                              ><%= shop.coupon.length %> offers</small
+                            ></span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <%} ) %>
+              </div>
+            </div> -->
+
+            <!--carousel test for most popular store-->
+            <div class="col-md-9  bg-light">
+              
+                <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel" data-interval="false">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <% shops.slice(0,9).map(function(shop){ %>
+                        <div class="single__shop mx-1 mb-2">
+                          <a href="/singleShop/<%= shop._id%>">
+                            <div
+                            class="d-flex justify-content-around align-items-center"
+                            >
+                            <div
+                              class="single__shop__logo d-flex mx-2 justify-content-center align-items-center"
+                            >
+                              <img
+                                class=""
+                                style="width: 80px; height: 50px"
+                                src="<%= shop.image %>"
+                              />
+                            </div>
+                          <div class="single__shop__details p-2">
+                            <div><%= shop.name %></div>
+                            <div>
+                              <span class="text-success"
+                                ><small
+                                  ><%= shop.coupon[0].couponDetails%></small
+                                ></span
+                              >
+                            </div>
+                            <div class="text-secondary">
+                              <span>
+                                <small
+                                  ><%= shop.coupon.length %> offers</small
+                                ></span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <%} ) %>
+                    
+                </div>
+                <div class="carousel-item">
+                  <% shops.slice(4,7).map(function(shop){ %>
+                    <div class="single__shop mx-1 mb-2">
+                      <a href="/singleShop/<%= shop._id%>">
+                        <div
+                          class="d-flex justify-content-around align-items-center"
+                        >
+                          <div
+                            class="single__shop__logo d-flex mx-2 justify-content-center align-items-center"
+                          >
+                            <img
+                              class=""
+                              style="width: 80px; height: 50px"
+                              src="<%= shop.image %>"
+                            />
+                          </div>
+                          <div class="single__shop__details p-2">
+                            <div><%= shop.name %></div>
+                            <div>
+                              <span class="text-success"
+                                ><small
+                                  ><%= shop.coupon[0].couponDetails%></small
+                                ></span
+                              >
+                            </div>
+                            <div class="text-secondary">
+                              <span>
+                                <small
+                                  ><%= shop.coupon.length %> offers</small
+                                ></span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <%} ) %>
+                    
+                      <a href="/allStores" class="single__shop mx-1 mb-2 my-0" style="display: flex; justify-content: center; align-items: center;font-size: 25px;"><p class="my-auto">View All Shops</p></a>
+                    
+                </div>
+            </div>
+            </div>
+            <a
+            class="carousel-control-prev carousel-control"
+            href="#carouselExampleControls1"
+            role="button"
+            data-slide="prev"
+          >
+            <!-- <span
+              class="fas fa-caret-left"
+              aria-hidden="true"
+              style="background-color: white;"
+            ></span> -->
+            <i class="fas fa-chevron-circle-left fa-2x" style="background-color:black;box-shadow: 0 0 5px black;border-radius:50%; position:absolute !important; right: 120px;"></i>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a
+            class="carousel-control-next carousel-control"
+            href="#carouselExampleControls1"
+            role="button"
+            data-slide="next"
+          >
+            <!-- <span
+              class="carousel-control-next-icon"
+              aria-hidden="true"
+            ></span> -->
+            <i class="fas fa-chevron-circle-right fa-2x" style="background-color:black;box-shadow: 0 0 5px black;border-radius:50%;position:absolute !important; left: 120px;"></i>
+            <span class="sr-only">Next</span>
+          </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Most Popular Stores End -->
+
+      <!-- Today's Best Deals start -->
+      <div class="row mt-5">
+        <h4 class="w-100 mb-5" style="text-align: center; font-weight: bold">
+          Today's Best Deals
+        </h4>
+        <% shops.slice(0,9).map(function(shop){ %>
+        <div class="col-md-4">
+          <div class="card border-0 mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div>
+                    <img
+                      class=""
+                      style="width: 100%; height: 80px"
+                      src="<%= shop.image %>"
+                    />
+                  </div>
+
+                  <div
+                    class="m-0 p-0"
+                    style="
+                      border: 2px solid white;
+                      position: absolute;
+                      top: 70px;
+                      left: 35px;
+                      width: 120px;
+                      height: 50px;
+                    "
+                  >
+                    <img
+                      style="width: 100%; height: 100%"
+                      src="<%= shop.image %>"
+                      alt=""
+                    />
+                  </div>
+                 
+                </div>
+              </div>
+
+              <div class="m-0 p-0 mt-5">
+                <p><%= shop.name %></p>
+                <p class="font-weight-bold">Extra 15% OFF Coupon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%} ) %>
+      </div>
+
+      <!-- Today's Best Deals end -->
+
+      <!-- CouponSite - Best place for Coupons, Discounts and Saving start -->
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="card" style="border-left: 5px solid #00b4cc">
+            <div class="card-body">
+              <h4 style="text-align: center; font-weight: bold">
+                CouponSite - Best place for Coupons, Discounts and Saving
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CouponSite - Best place for Coupons, Discounts and Saving end -->
+
+      <!-- Today's Best Coupons start -->
+      <div class="row mt-5">
+        <h4 class="w-100 mb-4" style="text-align: center; font-weight: bold">
+          Today's Best Coupons
+        </h4>
+        
+        <% shops.forEach(function(shop){ %>
+          <% let x = shop.coupon.map((coupon)=>coupon) %>
+          <% let shuffled = x.sort(()=>Math.random() - 0.5) %>
+          <% shuffled.slice(0,1).map(function(shuffle){ %>
+        <div class="col-md-4 mt-3">
+          <div class="card border-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-7 col-sm-6 d-flex justify-content-start">
+                  <div class="d-flex justify-content-around">
+                    <img class="car-img-size" src="<%= shop.image %>" />
+                    <p class="font-weight-bold ml-3" style="margin: auto">
+                      <%= shuffle.couponDetails %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <p>
+                    February Offer: Extra 10% OFF Noon Coupon Code On Everything
+                    + Free Delivery
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+            
+                    <button
+                    onclick="showModal('<%= shuffle.coupon %>')"
+                    data-modal-target="#modal1"
+                    class="btn btn-info btn-sm btn-block mt-5"
+                  >
+                    Show Coupon
+                  </button>
+                 
+                  
+                </div>
+              </div>
+              <div class="row mt-3 card-height">
+                <div class="col-md-12">
+                  <a href="/singleShop/<%=shop._id%>">
+                    <p>View All Company Offers</p></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <%})%> <%} )%>
+      </div>
+
+      <!-- Today's Best Coupons end -->
+      <!-- About CouponSite strat-->
+      <!-- <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="card" style="border-left: 7px solid #00b4cc">
+            <div class="card-body">
+              <div>
+                <h5 style="text-align: start; font-weight: bold">
+                  About CouponSite
+                </h5>
+              </div>
+
+              <div>
+                <p>
+                  Rezeem is one of the modst trusted platfroms where a valuable
+                  and less invasive way of savings provided to the shoppers. We
+                  are obsessively passionate about discovering and getting
+                  leverage number of coupons, offers, deals & discounts form
+                  100's of stores. Our mission is to help people save big on
+                  every online purchase. Offering simplified solutions &
+                  advanced features for finding the right pffer on products,
+                  service & activities give us great excitement.
+                  <a href="#">Read About Us...</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- About CouponSite End-->
+
+      <!-- Get In Touch start-->
+
+      <div class="row m-5">
+        <div class="col-md-12">
+          <div>
+            <h4 style="text-align: center; font-weight: bold">Get In Touch</h4>
+          </div>
+
+          <div>
+            <p style="text-align: center">
+              For all partnership queries & details, please click delow
+            </p>
+          </div>
+
+          <div style="text-align: center">
+            <a type="button" class="btn btn-info btn-lg" href="contactUs.html">
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Get In Touch start-->
+    </div>
+    <!-- main body end -->
+
+    <!-- footer strat -->
+    <!-- Footer -->
+    <footer
+      class="page-footer font-small unique-color-dark"
+      style="background-color: #ffffff"
+    >
+      <!-- newsletter start-->
+      <div class="container" style="background: lightblue; border-radius: 15px;">
+        <!-- Grid row-->
+        <div class="row py-4 d-flex align-items-center justify-content-between">
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+            <!-- <h6 class="mb-0">Get connected with us on social networks!</h6> -->
+            <h5 class="mb-0">Newsletter</h5>
+            <p class="mt-2">
+              <small
+                >Sign up for our Newsletter and get best money saving
+                coupons</small
+              >
+            </p>
+            <form action="/save_subscribers" method="post">
+              <input
+                class="p-1"
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter Your Email"
+              />
+              <button
+                type="submit"
+                class="btn btn-info"
+                style="
+                  height: 36px;
+                  line-height: normal;
+                  margin-left: -4.5px;
+                  margin-bottom: 1px;
+                  border-radius: 0;
+                "
+                onclick="changeSubscribe"
+              >
+                <span id="subscribe_Button">Subscribe</span>
+              </button>
+            </form>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-6 d-flex justify-content-end">
+            <img class="w-50" style="background: lightblue;opacity: 2;" src="./images/undraw_happy_announcement_ac67.png" alt="">
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row-->
+      </div>
+      <hr />
+      <div>
+        <div class="container">
+          <!-- Grid row-->
+          <div class="row py-4 d-flex align-items-center">
+            <!-- Grid column -->
+            <div
+              class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0"
+            >
+              <h6 class="mb-0">Get connected with us on social networks!</h6>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-6 col-lg-7 text-center text-md-right">
+              <!-- Facebook -->
+              <a class="fb-ic" href="#">
+                <i class="fab fa-facebook-f white-text mr-4"> </i>
+              </a>
+              <!-- Twitter -->
+              <a class="tw-ic" href="#">
+                <i class="fab fa-twitter white-text mr-4"> </i>
+              </a>
+              <!-- Google +-->
+              <a class="gplus-ic" href="#">
+                <i class="fab fa-google-plus-g white-text mr-4"> </i>
+              </a>
+              <!--Linkedin -->
+              <a class="li-ic" href="#">
+                <i class="fab fa-linkedin-in white-text mr-4"> </i>
+              </a>
+              <!--Instagram-->
+              <a class="ins-ic" href="#">
+                <i class="fab fa-instagram white-text"> </i>
+              </a>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row-->
+        </div>
+      </div>
+      <hr />
+
+      <!-- Footer Links -->
+      <div class="container text-center text-md-left mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-3 col-xl-2 mx-auto mb-4">
+            <!-- Content -->
+            <h4 class="font-weight-bold">CouponSit</h4>
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
+            <p>
+              Here you can use rows and columns to organize your footer content.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Quick Links</h6>
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
+            <p>
+              <a href="#!">All Stores</a>
+            </p>
+            <p>
+              <a href="#!">Catagories</a>
+            </p>
+            <p>
+              <a href="#!">Bank Offers</a>
+            </p>
+            <p>
+              <a href="#!">Exclusive Coupons</a>
+            </p>
+            <p>
+              <a href="#!">Blog</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Stores</h6>
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
+            <p>
+              <a href="#!">GAP Coupons</a>
+            </p>
+            <p>
+              <a href="#!">Nissnass Coupons</a>
+            </p>
+            <p>
+              <a href="#!">Shein Coupons</a>
+            </p>
+            <p>
+              <a href="#!">Homebox Coupons</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Information</h6>
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
+            <p>
+              <a href="#!">About Us</a>
+            </p>
+            <p>
+              <a href="#!">Help</a>
+            </p>
+            <p>
+              <a href="#!">Privacy</a>
+            </p>
+            <p>
+              <a href="#!">Terms</a>
+            </p>
+            <p>
+              <a href="#!">Contact Us</a>
+            </p>
+            <p>
+              <a href="#!">Partnership</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <hr
+              class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
+              style="width: 60px"
+            />
+            <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+            <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
+            <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+            <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+      <!-- Footer Links -->
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        © 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> CouponSit.com</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+    <!-- footer end -->
+
+    <!-- modal start-->
+
+    <div class="modal1" id="modal1">
+      <div class="modal1-header">
+        <button data-close-button class="close-button">&times;</button>
+      </div>
+      <div class="modal1-body">
+        <div class="container">
+          <div class="col" style="text-align: center;">
+            <p>Company Discount Code: Get 70% OFF + Extra 15% OFF On Everything | Full Price Items Only</p>
+            <span>
+              <input
+              type="text"
+              style="
+                width: 170px;
+                background-color: #d6fffe;
+                border-color: #5ef9f8;
+                border-radius: 0;
+                border: dashed;
+              "
+              id="couponData"
+            />  
+            
+            <button onclick="copyCode()" style="background-color: #00F4F3; color:#fff; border: none; padding: 3px; width: 70px;"><span id="copyChange">Copy</span></button>
+            </span>
+            
+          <p><small>Copy and Paste the Code at Company</small></p>
+          </div>
+          <div style="display: flex;; justify-content: space-between;">
+            <a href=""> < View All Company Coupons</a>
+            <a href="">Go To Company > </a>
+          </div>
+        </div>
+        <!-- <input type="text" class="font-weight-bold" id="couponData" style="margin: auto; display: none;"/> -->
+      </div>
+      <div class="modal1-footer" style="text-align: center;">
+        <p style="white-space: nowrap; margin-bottom: 0;padding: 5px;"><small>Sign Up for our Newsletter and get best money saving Company Coupons</small></p>
+        <span style="padding: 5px;"><input style="color:gray;padding: 1px;" type="email" value="Enter Email Address"> <button style="border: 1px solid gray; border-radius:0;color:gray; background-color: #fff;padding:2px">Subscribe</button></span>
+        <p style="margin-bottom: 0;padding: 5px;"><small>We never share your Email with others</small></p>
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <!-- <div class="icons">
+      <ul>
+        <a href=""><li class="facebook"><i class="fab fa-facebook"></i></li></a>
+        <a href=""><li class="youtube"><i class="fab fa-youtube"></i></li></a>
+        <a href=""><li class="instagram"><i class="fab fa-instagram"></i></li></a>
+        <a href=""><li class="twitter"><i class="fab fa-twitter"></i></li></a>
+      </ul>
+    </div> -->
+
+
+
+    <div class="sticky-container ct-socials"> <ul class="sticky"> <li class="face"> <a href="#" class="text-white" > <img width="32" height="32" title="" alt="" src="./images/fb1.png" /> <p class="">Facebook</p> </a> </li> <li class="tweet"> <a href="#" class="text-white"> <img width="32" height="32" title="" alt="" src="./images/tw1.png" /> <p>Twitter</p> </a> </li> <li class="linked"> <a href="#" class="text-white" > <img width="32" height="32" title="" alt="" src="./images/li1.png" /> <p>Linkedin</p> </a> </li> <li class="insta"> <a href="#" class="text-white" > <img width="32" height="32" title="" alt="" src="./images/ins1.png"/> <p>Instagram</p> </a> </li> </ul> </div> </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {});
+    </script>
+
+    <script type="text/javascript">
+      const openModalButtons = document.querySelectorAll("[data-modal-target]");
+      const closeModalButtons = document.querySelectorAll(
+        "[data-close-button]"
+      );
+
+      const overlay = document.getElementById("overlay");
+
+      openModalButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const modal = document.querySelector(button.dataset.modalTarget);
+          openModal(modal);
+        });
+      });
+
+      closeModalButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const modal = button.closest(".modal1");
+          closeModal(modal);
+        });
+      });
+
+      function openModal(modal) {
+        if (modal == null) return;
+        modal.classList.add("active");
+        overlay.classList.add("active");
+        // var couponValue = document.getElementById("couponValue").value;
+        // console.log(couponValue);
+        
+      }
+
+      function closeModal(modal) {
+        if (modal == null) return;
+        modal.classList.remove("active");
+        overlay.classList.remove("active");
+      }
+    </script>
+    <script>
+      function showModal(data){
+        // document.getElementById("couponData").innerText = data;
+        document.getElementById("couponData").value = data;
+        setTimeout(()=>{
+          window.open('https://www.facebook.com');
+        },600)
+        
+      }
+      function copyCode(){
+          /* Get the text field */
+      var copyText = document.getElementById("couponData");
+      document.getElementById("copyChange").innerHTML='<i class="far fa-check-circle">'+'Copied!!'+'</i>';
+      setTimeout(()=>{
+        document.getElementById("copyChange").innerText="Copy";
+      },2000)
+      
+
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+
+      
+      /* Alert the copied text */
+      console.log("Copied the text: " + copyText.value);
+
+      }
+
+      function changeSubscribe(){
+        
+        var subscribe_Button = document.getElementById("subscribe_Button");
+        subscribe_Button.innerHTML='<i class="far fa-check-circle">'+'Subscribed !'+'</i>';
+        
+      }
+    </script>
+
+    <script type="text/javascript">
+      const search = document.getElementById("search");
+      const matchList = document.getElementById("match-list");
+
+      const searchStates = async (searchText) => {
+        const res = await fetch("https://couponsite2020.herokuapp.com/allStoresNew");
+        const states = await res.json();
+          let matches = states.filter((state) => {
+          const regex = new RegExp(`${searchText}`, "gi");   
+          console.log(regex);
+          return state.name && state.name.match(regex);
+        });
+        
+
+        if (searchText.length === 0) {
+          matches = [];
+          // matchList.style.display = "block";
+          matchList.innerHTML='';
+        }
+
+        outputHtml(matches);
+      };
+      //Show results in HTML
+
+      const outputHtml = (matches) => {
+        if (matches.length > 0) {
+          document.getElementById("searchButtonId").disabled = false;
+          const html =  matches.map(
+              (match) => `
+              <a href="/singleShop/${match._id}">
+            <div class="p-2 d-flex" style="border-top:1px solid black; height:45px">
+              
+                <img class="mr-2" style="width:40px; height:30px" src="${match.image}"/>
+              <h4 style="font-size:15px; color:black">${match.name}</h4>
+              
+                
+            </div>
+          </a>
+          
+          
+          `
+            )
+            .join("");
+          matchList.innerHTML = html;
+        } else if (matches.length == 0) {
+          matchList.innerHTML = `<div class="p-2"><h4>nothing to show</h4></div>`;
+          document.getElementById("searchButtonId").disabled = true;
+        }
+      };
+
+//       const debounce = function (fn, delay) {
+//         let timer = 0;  
+//         clearTimeout(timer); 
+//         timer = setTimeout(() => {
+//         fn();
+//       }, delay);
+// };
+
+
+var debounce = function (fn, delay) {
+          
+        setTimeout(() => {
+          matchList.innerHTML=`<div class="p-2"><h4>Loading...</h4></div>`;
+        
+      }, delay);
+      fn();
+};
+
+      // search.addEventListener("input", () => searchStates(search.value));
+      search.addEventListener("input", () => debounce(searchStates(search.value), 200));
+    </script>
+
+    <script>
+      const dropdownId = document.getElementById("dropdownCategory");
+      const categoriesList = async () => {
+        const res = await fetch("https://couponsite2020.herokuapp.com/categoriesIndex");
+        const categories = await res.json();
+        const dropdowns = categories
+          .map(
+            (category) =>
+              `<a class="dropdown-item" href="/singleCategory/${category._id}">${category.name}</a>`
+          )
+          .join("");
+        dropdownId.innerHTML = dropdowns;
+      };
+      categoriesList();
+    </script>
+
+    <script>
+      const carousel_Inner_Id = document.getElementById("carousel-inner-id");
+      const bannerList = async() =>{
+        const res = await fetch("https://couponsite2020.herokuapp.com/banners");
+        const bannersResponse = await res.json();
+        console.log(bannersResponse[0].image);
+        const banners =
+        ` <div class="carousel-item active">
+                <img
+                  class="d-block"
+                  src="${bannersResponse[0] && bannersResponse[0].image}"
+                  alt="Second slide"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  class="d-block"
+                  src="${bannersResponse[1] && bannersResponse[1].image}"
+                  alt="Second slide"
+                />
+              </div>
+
+              <div class="carousel-item">
+                <img
+                  class="d-block"
+                  src="${bannersResponse[2] && bannersResponse[2].image}"
+                  alt="Second slide"
+                />
+              </div>
+              
+              ` 
+        ;
+        carousel_Inner_Id.innerHTML = banners
+      }
+      bannerList();
+    </script>
+
+    <!-- all stores navbar options  start-->
+
+    <script>
+      var dropdown_down_menu = document.getElementById("dropdown-menu-id");
+
+      const shopList = async () => {
+        const res = await fetch("http://localhost:8081/allStoresNew");
+        const allShop  = await res.json();
+        const dropdowns = allShop.slice(0,8)
+          .map(
+            (shop) =>
+              `       
+                        <div class="col-md-4 single__shop mx-1 mb-2">
+                          <a class="dropdown-item mega-navItem-background" href="/singleShop/${shop._id}">
+                            <div
+                              class="d-flex justify-content-around align-items-center"
+                              style="margin-top: -5px"
+                              
+                            >
+                              <div
+                                class="single__shop__logo d-flex mx-2 justify-content-center align-items-center"
+                              >
+                                <img
+                                  class=""
+                                  style="width: 80px; height: 50px"
+                                  src="${shop.image}"
+                                />
+                              </div>
+                              <div class="single__shop__details p-2">
+                                <div> ${shop.name}</div>
+                                <div>
+                                  <span class="text-success"
+                                    ><small
+                                      >${shop.coupon[0].couponDetails}</small
+                                    ></span
+                                  >
+                                </div>
+                                <div class="text-secondary">
+                                  <span>
+                                    <small
+                                      >${shop.coupon.length} offers</small
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        
+              `
+              
+          )
+          
+          .join("");
+          
+        dropdown_down_menu.innerHTML = dropdowns;
+        const viewAll = document.createElement("a");
+        viewAll.setAttribute("href","/allStores")
+        viewAll.innerText("See All")
+        dropdown_down_menu.append(viewAll);
+      };
+      shopList();
+
+    </script>
+
+    <!-- all stores navbar options  end-->
+
+    <!-- carousel next previous button hide -->
+    <script>
+      $('#carouselExampleControls1').carousel({
+      wrap: false
+});
+        $('#carouselExampleControls1').on('slid.bs.carousel', '', function() {
+  
+
+  if($('.carousel-inner .carousel-item:first').hasClass('active')) {
+    $('.carousel-control-prev').hide();
+    $('.carousel-control-next').show();
+  } if($('.carousel-inner .carousel-item:last').hasClass('active')) {
+    $('.carousel-control-prev').show();
+    $('.carousel-control-next').hide();
+  } else{
+    $('.carousel-control').show();
+  }
+
+});
+    </script>
+  </body>
+</html>
